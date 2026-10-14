@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: starter
+
+server:
+  port: ${SERVER_PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      # Never expose DB/disk internals on the public health endpoint.
+      show-details: never
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    access-exp-minutes: ${JWT_ACCESS_EXP_MINUTES:15}
+    refresh-exp-days: ${JWT_REFRESH_EXP_DAYS:7}
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS}
+  rate-limit:
+    enabled: ${RATE_LIMIT_ENABLED:true}
+    capacity: ${RATE_LIMIT_CAPACITY:5}
+    window-seconds: ${RATE_LIMIT_WINDOW_SECONDS:60}
